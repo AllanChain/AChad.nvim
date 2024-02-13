@@ -1,16 +1,18 @@
 require "options"
 require "mappings"
 require "commands"
+local github = require "github"
 
 -- bootstrap plugins & lazy.nvim
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim" -- path where its going to be installed
 
 if not vim.loop.fs_stat(lazypath) then
+  vim.api.nvim_echo({ { "Cloning lazy.nvim", "Bold" } }, true, {})
   vim.fn.system {
     "git",
     "clone",
     "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
+    github .. "folke/lazy.nvim.git",
     "--branch=stable",
     lazypath,
   }
@@ -20,7 +22,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({ { import = "plugins" } }, {
   install = { colorscheme = { "onenord" } },
-  git = { url_format = require "github" .. "%s.git" },
+  git = { url_format = github .. "%s.git" },
   performance = {
     rtp = {
       disabled_plugins = {
