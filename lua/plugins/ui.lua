@@ -319,6 +319,22 @@ return {
     end,
   },
   {
+    "goolord/alpha-nvim",
+    event = "VimEnter",
+    config = function()
+      local has_alpha, alpha = pcall(require, "alpha")
+      if not has_alpha then
+        return
+      end
+      alpha.setup(require("configs.alpha").config)
+    end,
+  },
+  {
+    "stevearc/dressing.nvim",
+    event = "VimEnter",
+    opts = {},
+  },
+  {
     "folke/which-key.nvim",
     keys = { "<leader>", "<c-r>", "<c-w>", '"', "'", "`", "c", "v", "g" },
     -- init = function()
