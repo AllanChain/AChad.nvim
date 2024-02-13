@@ -74,18 +74,6 @@ return {
   },
   {
     "nvim-tree/nvim-web-devicons",
-    opts = {
-      sync_root_with_cwd = true,
-      respect_buf_cwd = true,
-      update_focused_file = {
-        enable = true,
-        update_root = true,
-      },
-      git = {
-        enable = true,
-        ignore = true,
-      },
-    },
     config = function()
       require("nvim-web-devicons").setup()
     end,
@@ -213,10 +201,70 @@ return {
     end,
   },
   {
+    "j-hui/fidget.nvim",
+    opts = {
+      progress = {
+        suppress_on_insert = true,
+        ignore_done_already = true,
+        ignore_empty_message = true,
+        display = {
+          render_limit = 8,
+          done_ttl = 0,
+          done_icon = "",
+        },
+      },
+    },
+    config = function(_, opts)
+      require("fidget").setup(opts)
+    end,
+  },
+  {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      require("lualine").setup { options = { theme = "onenord" } }
+    opts = function()
+      local function LSP_status()
+        local client_names = {}
+        local client_count = 0
+        if rawget(vim, "lsp") then
+          for _, client in ipairs(vim.lsp.get_active_clients()) do
+            if client.attached_buffers[vim.api.nvim_get_current_buf()] then
+              client_count = client_count + 1
+              local client_name = client.name:gsub("[_-]lsp?$", "")
+              client_name = client_name:gsub("[_-]language[_-]server$", "")
+              client_names[client_count] = client_name
+              if client_count == 3 then
+                break
+              end
+            end
+          end
+        end
+        if client_count == 0 then
+          return ""
+        end
+        if vim.o.columns <= 100 then
+          return "  "
+        end
+        return " " .. table.concat(client_names, "|")
+      end
+      return {
+        options = {
+          theme = "onenord",
+          component_separators = { left = "", right = "" },
+          section_separators = { left = "", right = "" },
+        },
+        sections = {
+          lualine_a = { "mode" },
+          lualine_b = { "branch", "diagnostics" },
+          lualine_c = { "filename" },
+          lualine_x = { "filetype" },
+          lualine_y = { LSP_status },
+          lualine_z = { "location" },
+        },
+        extensions = { "toggleterm", "nvim-tree", "lazy", "aerial", "nvim-dap-ui" },
+      }
+    end,
+    config = function(_, opts)
+      require("lualine").setup(opts)
     end,
   },
   {
