@@ -351,4 +351,12 @@ return {
       require("which-key").setup(opts)
     end,
   },
+  {
+    "dgagn/diagflow.nvim",
+    event = "LspAttach",
+    opts = {
+      toggle_event = { 'InsertEnter' }, -- disable when insert
+      scope = "line",
+    },
+  },
 }
