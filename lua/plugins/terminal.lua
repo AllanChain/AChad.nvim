@@ -49,7 +49,7 @@ return {
         persist_size = true,
         direction = "float",
         close_on_exit = true,
-        shell = vim.o.shell,
+        shell = vim.env.NVIM_SHELL or vim.o.shell,
         float_opts = {
           border = "curved",
         },
