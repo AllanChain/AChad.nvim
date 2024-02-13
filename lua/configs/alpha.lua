@@ -1,5 +1,3 @@
-local has_project, project_history = pcall(require, "project_nvim.utils.history")
-
 local M = {}
 
 local function header_hl_today()
@@ -44,10 +42,17 @@ function M.recent_projects(start, target_width)
   if target_width == nil then
     target_width = 50
   end
+
+  local has_project, project = pcall(require, "project_nvim.project")
   if not has_project then
     return require("alpha.themes.theta").mru(start, vim.fn.getcwd())
   end
+
+  local project_history = require "project_nvim.utils.history"
   local buttons = {}
+  -- Ensure current dir is added
+  local root, _ = project.get_project_root()
+  table.insert(project_history.session_projects, root)
   local project_paths = project_history.get_recent_projects()
   local added_projects = 0
   -- most recent project is the last
