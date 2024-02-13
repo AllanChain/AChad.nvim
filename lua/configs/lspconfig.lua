@@ -56,43 +56,38 @@ capabilities.textDocument.completion.completionItem = {
 }
 
 -- Setup language servers.
-lspconfig.lua_ls.setup {
-  capabilities = capabilities,
+local function setup(lsp, opts)
+  local executable = lspconfig[lsp].document_config.default_config.cmd[1]
+  opts = vim.tbl_extend("force", { capabilities = capabilities }, opts or {})
+  if vim.fn.executable(executable) ~= 0 then
+    lspconfig[lsp].setup(opts)
+  end
+end
+
+setup "html"
+setup "cssls"
+setup "astro"
+setup "volar"
+setup "svelte"
+setup "jsonls"
+setup "jsonls"
+setup "emmet_ls"
+setup "gopls"
+setup "clangd"
+
+setup("lua_ls", {
   settings = {
     Lua = {
       diagnostics = { globals = { "vim" } },
     },
   },
-}
+})
 
-local servers = {
-  "html",
-  "cssls",
-  "julials",
-  "astro",
-  "volar",
-  "svelte",
-  "jsonls",
-  "emmet_ls",
-  "gopls",
-  "clangd",
-}
-
-for _, lsp in ipairs(servers) do
-  local executable = lspconfig[lsp].document_config.default_config.cmd[1]
-  if vim.fn.executable(executable) ~= 0 then
-    lspconfig[lsp].setup {
-      capabilities = capabilities,
-    }
-  end
-end
-
-lspconfig.tsserver.setup {
-  capabilities = capabilities,
+setup("tsserver", {
   on_attach = function(client, bufnr)
     client.server_capabilities.document_formatting = false
   end,
-}
+})
 
 -- https://github.com/neovim/nvim-lspconfig/issues/500
 local function get_python_path(workspace)
@@ -110,39 +105,25 @@ local function get_python_path(workspace)
   return exepath "python3" or exepath "python" or "python"
 end
 
-lspconfig.pyright.setup {
-  capabilities = capabilities,
+setup("pyright", {
   before_init = function(_, config)
     config.settings.python.pythonPath = get_python_path(config.root_dir)
   end,
   settings = {
-    python = {
-      analysis = {
-        typeCheckingMode = "off",
-      },
-    },
+    python = { analysis = { typeCheckingMode = "off" } },
   },
-}
+})
 
-lspconfig.julials.setup {
-  capabilities = capabilities,
+setup("julials", {
   settings = {
-    julia = {
-      lint = {
-        missingrefs = "none",
-      },
-    },
+    julia = { lint = { missingrefs = "none" } },
   },
-}
+})
 
-lspconfig.texlab.setup {
-  capabilities = capabilities,
+setup("texlab", {
   settings = {
     texlab = {
-      build = {
-        onSave = true,
-        args = { "-interaction=nonstopmode", "%f" },
-      },
+      build = { onSave = true, args = { "-interaction=nonstopmode", "%f" } },
     },
   },
-}
+})
