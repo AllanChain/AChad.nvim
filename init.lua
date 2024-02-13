@@ -18,8 +18,9 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({{ import = "plugins" }}, {
+require("lazy").setup({ { import = "plugins" } }, {
   install = { colorscheme = { "onenord" } },
+  git = { url_format = require "github" .. "%s.git" },
   performance = {
     rtp = {
       disabled_plugins = {
