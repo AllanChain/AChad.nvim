@@ -57,6 +57,17 @@ return {
     end,
   },
   {
+    "NvChad/nvim-colorizer.lua",
+    opts = {
+      user_default_options = {
+        names = false,
+      },
+    },
+    config = function(_, opts)
+      require("colorizer").setup(opts)
+    end,
+  },
+  {
     "stevearc/dressing.nvim",
     event = "VimEnter",
     opts = {},
