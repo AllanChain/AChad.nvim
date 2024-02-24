@@ -29,7 +29,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       ["gi"] = { vim.lsp.buf.implementation, "Goto implementation" },
       ["<C-k>"] = { vim.lsp.buf.signature_help, "Signature" },
       ["<leader>ra"] = { vim.lsp.buf.rename, "Rename" },
-      ["<leader>fm"] = { vim.lsp.buf.format, "Format" },
       ["<leader>ca"] = { vim.lsp.buf.code_action, "Code action" },
     }, { buffer = ev.buf })
   end,

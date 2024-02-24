@@ -74,19 +74,6 @@ local sources = {
   --[[#########################
   --           Python
   --#########################]]
-  b.formatting.isort.with {
-    runtime_condition = create_run_condition("isort", {
-      ".isort.cfg",
-      { read = "pyproject.toml", find = "%[tool.isort%]" },
-      { read = "setup.cfg", find = "isort" },
-    }),
-  },
-  b.formatting.black.with {
-    runtime_condition = create_run_condition("black", {
-      { read = "pyproject.toml", find = "%[tool.black%]" },
-      { read = "setup.cfg", find = "black" },
-    }),
-  },
   b.diagnostics.mypy.with {
     runtime_condition = create_run_condition("mypy", {
       ".mypy.ini",
@@ -107,32 +94,9 @@ local sources = {
       { read = "setup.cfg", find = "pycodestyle" },
     }),
   },
-  b.diagnostics.ruff.with {
-    runtime_condition = create_run_condition("ruff", {
-      { read = "pyproject.toml", find = "%[tool.ruff%]" },
-    }),
-  },
-  b.formatting.autopep8.with {
-    runtime_condition = function(params)
-      local root = params.root or utils.get_root()
-      return not cond_cache[root].black
-    end,
-  },
   --[[#########################
   --     JS, HTML, and CSS
   --#########################]]
-  b.formatting.prettier.with {
-    generator_opts = {
-      prefer_local = "node_modules/.bin",
-    },
-    runtime_condition = create_run_condition("prettier", {
-      ".prettierrc",
-      { read = "package.json", find = '"prettier"' },
-    }),
-  },
-  b.formatting.eslint_d.with {
-    runtime_condition = create_run_condition("eslint", ".eslintrc"),
-  },
   b.diagnostics.eslint_d.with {
     runtime_condition = create_run_condition("eslint", ".eslintrc"),
   },
@@ -142,18 +106,14 @@ local sources = {
   --[[#########################
   --            Lua
   --#########################]]
-  b.formatting.stylua,
   b.diagnostics.luacheck.with { extra_args = { "--global vim" } },
   --[[#########################
   --          Golang
   --#########################]]
-  b.formatting.gofmt,
-  b.formatting.goimports,
   b.diagnostics.staticcheck,
   --[[#########################
   --       Miscellaneous
   --#########################]]
-  b.formatting.shfmt,
   b.diagnostics.shellcheck,
   julia,
 }
