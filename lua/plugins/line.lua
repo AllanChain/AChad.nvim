@@ -23,9 +23,9 @@ return {
           return ""
         end
         if vim.o.columns <= 100 then
-          return "  "
+          return " 󰚔 "
         end
-        return " " .. table.concat(client_names, "|")
+        return "󰚔 " .. table.concat(client_names, "|")
       end
       return {
         options = {
