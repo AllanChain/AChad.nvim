@@ -73,6 +73,7 @@ setup "jsonls"
 setup "emmet_ls"
 setup "gopls"
 setup "clangd"
+setup "pyright"
 
 setup("lua_ls", {
   settings = {
@@ -86,12 +87,6 @@ setup("tsserver", {
   on_attach = function(client, bufnr)
     client.server_capabilities.document_formatting = false
   end,
-})
-
-setup("pyright", {
-  settings = {
-    python = { analysis = { typeCheckingMode = "off" } },
-  },
 })
 
 setup("ruff_lsp", {

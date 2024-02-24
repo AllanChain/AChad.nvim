@@ -72,16 +72,6 @@ end
 
 local sources = {
   --[[#########################
-  --           Python
-  --#########################]]
-  b.diagnostics.mypy.with {
-    runtime_condition = create_run_condition("mypy", {
-      ".mypy.ini",
-      { read = "pyproject.toml", find = "%[tool.mypy%]" },
-      { read = "setup.cfg", find = "mypy" },
-    }),
-  },
-  --[[#########################
   --            Lua
   --#########################]]
   b.diagnostics.luacheck.with { extra_args = { "--global vim" } },
