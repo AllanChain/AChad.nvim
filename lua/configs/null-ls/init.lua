@@ -81,28 +81,6 @@ local sources = {
       { read = "setup.cfg", find = "mypy" },
     }),
   },
-  b.diagnostics.flake8.with {
-    runtime_condition = create_run_condition("flake8", {
-      ".flake8",
-      { read = "setup.cfg", find = "flake8" },
-    }),
-  },
-  b.diagnostics.pydocstyle.with {
-    runtime_condition = create_run_condition("pydocstyle", {
-      ".pydocstyle",
-      { read = "pyproject.toml", find = "%[tool.pydocstyle%]" },
-      { read = "setup.cfg", find = "pycodestyle" },
-    }),
-  },
-  --[[#########################
-  --     JS, HTML, and CSS
-  --#########################]]
-  b.diagnostics.eslint_d.with {
-    runtime_condition = create_run_condition("eslint", ".eslintrc"),
-  },
-  b.code_actions.eslint_d.with {
-    runtime_condition = create_run_condition("eslint", ".eslintrc"),
-  },
   --[[#########################
   --            Lua
   --#########################]]

@@ -68,7 +68,7 @@ setup "cssls"
 setup "astro"
 setup "volar"
 setup "svelte"
-setup "jsonls"
+setup "eslint"
 setup "jsonls"
 setup "emmet_ls"
 setup "gopls"
@@ -111,6 +111,15 @@ setup("pyright", {
   settings = {
     python = { analysis = { typeCheckingMode = "off" } },
   },
+})
+
+setup("ruff_lsp", {
+  on_attach = function(client, bufnr)
+    if client.name == "ruff_lsp" then
+      -- Disable hover in favor of Pyright
+      client.server_capabilities.hoverProvider = false
+    end
+  end,
 })
 
 setup("julials", {
