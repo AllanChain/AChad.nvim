@@ -58,13 +58,6 @@ return {
     end,
   },
   {
-    "nvimtools/none-ls.nvim",
-    event = "BufReadPost",
-    config = function()
-      require "configs.null-ls"
-    end,
-  },
-  {
     "nvim-treesitter/nvim-treesitter",
     event = { "BufReadPost", "BufNewFile" },
     tag = "v0.9.2",
