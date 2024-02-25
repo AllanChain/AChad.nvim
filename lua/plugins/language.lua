@@ -97,6 +97,31 @@ return {
     end,
   },
   {
+    "mfussenegger/nvim-lint",
+    event = "BufReadPost",
+    config = function()
+      local lint = require "lint"
+      local linters_by_ft = {
+        python = { "mypy", "flake8" },
+      }
+      vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+        callback = function()
+          local linters = linters_by_ft[vim.bo.filetype]
+          if linters == nil then
+            return
+          end
+          local available_linters = {}
+          for _, linter in ipairs(linters) do
+            if vim.fn.executable(linter) ~= 0 then
+              table.insert(available_linters, linter)
+            end
+          end
+          lint.try_lint(available_linters)
+        end,
+      })
+    end,
+  },
+  {
     "JuliaEditorSupport/julia-vim",
     lazy = false,
     ft = { "julia" },
