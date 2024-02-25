@@ -101,8 +101,16 @@ return {
     event = "BufReadPost",
     config = function()
       local lint = require "lint"
+      lint.linters.pydoclint = {
+        name = "pydoclint",
+        cmd = "pydoclint",
+        stdin = false,
+        stream = "stderr",
+        ignore_exitcode = true,
+        parser = require("lint.parser").from_pattern("(%d+): (.*)", { "lnum", "message" }),
+      }
       local linters_by_ft = {
-        python = { "mypy", "flake8" },
+        python = { "mypy", "flake8", "pydoclint" },
       }
       vim.api.nvim_create_autocmd({ "BufWritePost" }, {
         callback = function()
