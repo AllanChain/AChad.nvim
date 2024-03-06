@@ -93,9 +93,9 @@ return {
             with("ruff_format", {
               { read = "pyproject.toml", find = "ruff" },
             }, bufnr),
-            available("black", {
+            with("black", {
               { read = "pyproject.toml", find = "black" },
-            }, bufnr) and "black" or "autopep8",
+            }, bufnr),
             with("isort", {
               { read = "pyproject.toml", find = "isort" },
             }, bufnr),
