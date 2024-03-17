@@ -59,7 +59,7 @@ require("lazy").setup("plugins", {
 })
 
 if vim.g.neovide then
-  vim.o.guifont = "ComicShannsMono Nerd Font,Source Code Pro:h15"
+  vim.o.guifont = "ComicShannsMono Nerd Font,Source Code Pro,Noto Sans CJK SC:h15"
   vim.g.neovide_transparency = 0.95
 end
 
