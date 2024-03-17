@@ -32,17 +32,7 @@ return {
       end
       local utils = require "auto-save.utils.data"
       autosave.setup {
-        print_enabled = false,
-        callbacks = {
-          after_saving = function()
-            local msg = "Saved at " .. vim.fn.strftime "%H:%M:%S"
-            vim.notify(msg, vim.log.levels.INFO, {
-              timeout = 100,
-              title = "AutoSave",
-              render = "compact",
-            })
-          end,
-        },
+        debounce_delay = 5000,
         condition = function(buf)
           if vim.fn.getcwd():match "nvim" then
             return false
