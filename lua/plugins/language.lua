@@ -114,6 +114,11 @@ return {
       }
       vim.api.nvim_create_autocmd({ "BufWritePost" }, {
         callback = function()
+          local f = io.open(vim.api.nvim_buf_get_name(0), "r")
+          if f ~= nil then -- Ugly workaround on some shared filesystems
+            f:close() -- where accessing the file changes the modified time,
+            vim.cmd "checktime" -- making nvim thinking the file has changed
+          end
           local linters = linters_by_ft[vim.bo.filetype]
           if linters == nil then
             return
