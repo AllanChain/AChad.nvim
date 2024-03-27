@@ -19,12 +19,12 @@ M.create = function()
     dir = dir,
     direction = "float",
     float_opts = {
-      border = "double",
+      border = "none",
       width = function(_)
-        return vim.o.columns - 4
+        return vim.o.columns
       end,
       height = function(_)
-        return vim.o.lines - 5
+        return vim.o.lines
       end,
     },
     -- function to run on opening the terminal
