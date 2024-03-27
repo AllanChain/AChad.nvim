@@ -20,7 +20,7 @@ return {
       {
         "<leader>rf",
         function()
-          local run = require "custom.integrations.run_file"
+          local run = require "integrations.run_file"
           if not run then
             return
           end
