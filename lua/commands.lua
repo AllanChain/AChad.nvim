@@ -23,15 +23,6 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- better autoread on file change
--- https://github.com/neovim/neovim/issues/1936#issuecomment-309311829
-vim.api.nvim_create_autocmd("FocusGained", {
-  pattern = "*",
-  callback = function()
-    vim.cmd "checktime" -- checktime triggers autoread
-  end,
-})
-
 -- Add new file types
 vim.filetype.add {
   extension = {
