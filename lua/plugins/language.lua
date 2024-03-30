@@ -60,22 +60,9 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     event = { "BufReadPost", "BufNewFile" },
-    tag = "v0.9.2",
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
     opts = {
-      ensure_installed = {
-        "lua",
-        "vim",
-        "python",
-        "javascript",
-        "css",
-        "html",
-        "bash",
-        "markdown",
-        "markdown_inline",
-        "regex",
-      },
       highlight = {
         enable = true,
         use_languagetree = true,
