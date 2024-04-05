@@ -79,6 +79,7 @@ return {
     },
     opts = {
       formatters_by_ft = {
+        arduino = { "clang-format" },
         lua = { "stylua" },
         javascript = { { "prettierd", "prettier" }, "eslint_d" },
         go = { "goimports", "gofmt" },

@@ -74,6 +74,13 @@ setup "emmet_ls"
 setup "gopls"
 setup "clangd"
 
+setup("arduino_language_server", {
+   on_new_config = function (config, root_dir)
+    config.capabilities.textDocument.semanticTokens = vim.NIL
+    config.capabilities.workspace.semanticTokens = vim.NIL
+  end
+})
+
 setup("lua_ls", {
   settings = {
     Lua = {
