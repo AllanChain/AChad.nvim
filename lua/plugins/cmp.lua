@@ -24,27 +24,27 @@ return {
       },
 
       -- autopairs , autocompletes ()[] etc
-      {
-        "windwp/nvim-autopairs",
-        config = function(_, opts)
-          require("nvim-autopairs").setup(opts)
-
-          local autopairs = require "nvim-autopairs"
-          local cond = require "nvim-autopairs.conds"
-          autopairs.get_rules("'")[1]:with_pair(cond.not_filetypes { "scheme", "lisp", "clojure" })
-          -- setup cmp for autopairs. Copied from NvChad
-          local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-          local cmp = require "cmp"
-          cmp.event:on(
-            "confirm_done",
-            cmp_autopairs.on_confirm_done {
-              filetypes = {
-                tex = false,
-              },
-            }
-          )
-        end,
-      },
+      -- {
+      --   "windwp/nvim-autopairs",
+      --   config = function(_, opts)
+      --     require("nvim-autopairs").setup(opts)
+      --
+      --     local autopairs = require "nvim-autopairs"
+      --     local cond = require "nvim-autopairs.conds"
+      --     autopairs.get_rules("'")[1]:with_pair(cond.not_filetypes { "scheme", "lisp", "clojure" })
+      --     -- setup cmp for autopairs. Copied from NvChad
+      --     local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+      --     local cmp = require "cmp"
+      --     cmp.event:on(
+      --       "confirm_done",
+      --       cmp_autopairs.on_confirm_done {
+      --         filetypes = {
+      --           tex = false,
+      --         },
+      --       }
+      --     )
+      --   end,
+      -- },
     },
     config = function()
       local cmp = require "cmp"
