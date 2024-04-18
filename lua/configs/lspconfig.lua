@@ -119,7 +119,7 @@ setup("julials", {
 setup("texlab", {
   settings = {
     texlab = {
-      build = { onSave = true, args = { "-interaction=nonstopmode", "%f" } },
+      build = { args = { "-interaction=nonstopmode", "%f" } },
     },
   },
 })
