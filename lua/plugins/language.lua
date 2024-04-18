@@ -101,9 +101,9 @@ return {
       }
       vim.api.nvim_create_autocmd({ "BufWritePost" }, {
         callback = function()
-          local linters = linters_by_ft[vim.bo.filetype]
-          if linters == nil then
-            return
+          local linters = linters_by_ft[vim.bo.filetype] or {}
+          if vim.fn.expand("%:p"):match ".github/workflows/" then
+            table.insert(linters, "actionlint")
           end
           local available_linters = {}
           for _, linter in ipairs(linters) do
