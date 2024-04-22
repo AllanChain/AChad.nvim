@@ -37,9 +37,24 @@ local function match_pattern(root, pattern)
   end
 end
 
-local function available(formatter, pattern, bufnr)
+---Test if formatter is available
+---@param formatters string | table<string>
+---@param pattern Pattern
+---@param bufnr integer
+---@return boolean
+local function available(formatters, pattern, bufnr)
   local conform = require "conform"
-  local info = conform.get_formatter_info(formatter, bufnr)
+  local info
+  if type(formatters) == "table" then
+    for _, formatter in ipairs(formatters) do
+      info = conform.get_formatter_info(formatter, bufnr)
+      if info.available then
+        break
+      end
+    end
+  else
+    info = conform.get_formatter_info(formatters, bufnr)
+  end
   if info.available then
     local cwd = info.cwd or vim.fn.getcwd()
     if match_pattern(cwd, pattern) then
@@ -77,40 +92,50 @@ return {
         desc = "Format file",
       },
     },
-    opts = {
-      formatters_by_ft = {
-        arduino = { "clang-format" },
-        cpp = { "clang-format" },
-        c = { "clang-format" },
+    opts = function()
+      local function python_formatters(bufnr)
+        return expand_formatters {
+          with("ruff_fix", {
+            { read = "pyproject.toml", find = "ruff" },
+          }, bufnr),
+          with("ruff_format", {
+            { read = "pyproject.toml", find = "ruff" },
+          }, bufnr),
+          with("black", {
+            { read = "pyproject.toml", find = "black" },
+          }, bufnr),
+          with("isort", {
+            { read = "pyproject.toml", find = "isort" },
+          }, bufnr),
+        }
+      end
+      local function js_formatters(bufnr)
+        return expand_formatters {
+          with("eslint_d", {
+            { read = "package.json", find = "eslint" },
+          }, bufnr),
+          with({ "prettierd", "prettier" }, {
+            { read = "package.json", find = "prettier" },
+          }, bufnr),
+        }
+      end
+      local formatters_by_ft = {
         lua = { "stylua" },
-        html = { { "prettierd", "prettier" }, "eslint_d" },
-        css = { { "prettierd", "prettier" }, "eslint_d" },
-        javascript = { { "prettierd", "prettier" }, "eslint_d" },
-        typescript = { { "prettierd", "prettier" }, "eslint_d" },
-        astro = { { "prettierd", "prettier" }, "eslint_d" },
-        svelte = { { "prettierd", "prettier" }, "eslint_d" },
-        vue = { { "prettierd", "prettier" }, "eslint_d" },
         go = { "goimports", "gofmt" },
-        bash = { "shfmt" },
-        zsh = { "shfmt" },
-        sh = { "shfmt" },
-        python = function(bufnr)
-          return expand_formatters {
-            with("ruff_fix", {
-              { read = "pyproject.toml", find = "ruff" },
-            }, bufnr),
-            with("ruff_format", {
-              { read = "pyproject.toml", find = "ruff" },
-            }, bufnr),
-            with("black", {
-              { read = "pyproject.toml", find = "black" },
-            }, bufnr),
-            with("isort", {
-              { read = "pyproject.toml", find = "isort" },
-            }, bufnr),
-          }
-        end,
-      },
-    },
+        python = python_formatters,
+      }
+      for _, lang in ipairs { "arduino", "c", "cpp" } do
+        formatters_by_ft[lang] = { "clang-format" }
+      end
+      for _, lang in ipairs { "bash", "zsh", "sh" } do
+        formatters_by_ft[lang] = { "shfmt" }
+      end
+      for _, lang in ipairs { "html", "css", "scss", "javascript", "typescript", "astro", "svelte", "vue" } do
+        formatters_by_ft[lang] = js_formatters
+      end
+      return {
+        formatters_by_ft = formatters_by_ft,
+      }
+    end,
   },
 }
