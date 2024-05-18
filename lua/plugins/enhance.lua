@@ -16,28 +16,6 @@ return {
       --Config goes here
     },
   },
-  {
-    "numToStr/Comment.nvim",
-    lazy = true,
-    keys = {
-      {
-        "<leader>/",
-        "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
-        mode = "v",
-        desc = "Comment",
-      },
-      {
-        "<leader>/",
-        function()
-          require("Comment.api").toggle.linewise.current()
-        end,
-        desc = "Comment",
-      },
-    },
-    config = function()
-      require("Comment").setup()
-    end,
-  },
   { -- auto adjust shiftwidth
     "tpope/vim-sleuth",
     event = "BufReadPost",
