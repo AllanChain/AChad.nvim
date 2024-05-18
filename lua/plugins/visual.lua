@@ -86,4 +86,15 @@ return {
     "Bekaboo/deadcolumn.nvim",
     event = "BufReadPost",
   },
+  { -- Highlight command line
+    {
+      "Sam-programs/cmdline-hl.nvim",
+      event = "VimEnter",
+      opts = {
+        custom_types = {
+          ["lua"] = { icon = " " },
+        },
+      },
+    },
+  },
 }
