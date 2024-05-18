@@ -86,7 +86,7 @@ function M.recent_projects(start, target_width)
           width = target_width + 3,
           align_shortcut = "right",
           hl_shortcut = "Keyword",
-          hl = { { "Number", 1, 3 } },
+          hl = { { "Number", 0, 3 } },
           keymap = {
             "n",
             shortcut,
@@ -157,10 +157,10 @@ function M.shortcuts()
       opts = {
         position = "center",
         hl = {
-          { "String", 1, 20 },
-          { "Keyword", 20, 38 },
-          { "Function", 38, 58 },
-          { "Constant", 58, 70 },
+          { "String", 0, 18 },
+          { "Keyword", 18, 36 },
+          { "Function", 36, 56 },
+          { "Constant", 56, 70 },
         },
       },
     },
