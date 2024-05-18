@@ -7,7 +7,7 @@ return {
         local client_names = {}
         local client_count = 0
         if rawget(vim, "lsp") then
-          for _, client in ipairs(vim.lsp.get_active_clients()) do
+          for _, client in ipairs(vim.lsp.get_clients()) do
             if client.attached_buffers[vim.api.nvim_get_current_buf()] then
               client_count = client_count + 1
               local client_name = client.name:gsub("[_-]lsp?$", "")

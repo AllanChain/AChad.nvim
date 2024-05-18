@@ -2,7 +2,7 @@ local map = vim.keymap.set
 
 map("n", "<C-s>", function()
   vim.cmd "write"
-  for _, client in ipairs(vim.lsp.get_active_clients()) do
+  for _, client in ipairs(vim.lsp.get_clients()) do
     if client.name == "texlab" then
       vim.cmd "TexlabBuild"
     end
