@@ -74,8 +74,6 @@ return {
   { -- Dim unused vars
     "zbirenbaum/neodim",
     event = "LspAttach",
-    -- TODO: Remove the constrain after NeoVim 0.10.0
-    commit = "f11c110",
     opts = {
       alpha = 0.5,
       blend_color = "#2e3440",
