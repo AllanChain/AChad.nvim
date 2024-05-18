@@ -11,3 +11,5 @@ end)
 map("i", "<C-e>", "<End>")
 map("n", "<Esc>", "<cmd> nohl <CR>")
 map("n", "ZZ", "<cmd> xa <CR>")
+-- Allow using <C-I> separately from <Tab>
+map("n", "<C-I>", "<C-I>", { noremap = true })
