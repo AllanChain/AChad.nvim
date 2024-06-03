@@ -8,7 +8,9 @@ return {
     config = function()
       local colors = require("onenord.colors").load()
       require("onenord").setup {
+        fade_nc = true, -- Fade non-current windows
         custom_highlights = {
+          ["DiffDelete"] = { fg = colors.diff_change_bg, bg = colors.none },
           ["ConflictIncoming"] = colors.diff_add_bg,
           ["ConflictCurrent"] = colors.diff_change_bg,
         },
