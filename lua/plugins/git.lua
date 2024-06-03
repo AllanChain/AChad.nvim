@@ -10,6 +10,15 @@ return {
     end,
   },
   {
+    "sindrets/diffview.nvim",
+    cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+    keys = {
+      { "<leader>go", "<Cmd>DiffviewOpen<CR>", desc = "Open diffview" },
+      { "<leader>gh", "<Cmd>DiffviewFileHistory<CR>", desc = "Open file history" },
+    },
+    config = true,
+  },
+  {
     "akinsho/git-conflict.nvim",
     event = "BufReadPost",
     keys = {
