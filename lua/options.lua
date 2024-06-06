@@ -36,6 +36,10 @@ opt.updatetime = 250
 
 opt.fillchars:append { diff = "╱" }
 
+opt.foldtext = "" -- Transparent folding
+opt.foldexpr = "v:lua.fold.foldexpr()"
+opt.foldmethod = "expr"
+
 -- add binaries installed by mason.nvim to path
 local is_windows = vim.loop.os_uname().sysname == "Windows_NT"
 vim.env.PATH = vim.env.PATH .. (is_windows and ";" or ":") .. vim.fn.stdpath "data" .. "/mason/bin"
