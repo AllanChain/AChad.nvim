@@ -21,24 +21,6 @@ return {
     event = "BufReadPost",
   },
   {
-    "ojroques/nvim-osc52", -- yank contents over SSH
-    event = "BufReadPost",
-    config = function()
-      local ok, osc52 = pcall(require, "osc52")
-      if not ok then
-        return
-      end
-      osc52.setup { silent = true }
-      vim.api.nvim_create_autocmd("TextYankPost", {
-        callback = function()
-          if vim.env.TMUX and vim.v.event.operator == "y" and vim.v.event.regname == "" then
-            osc52.copy_register "+"
-          end
-        end,
-      })
-    end,
-  },
-  {
     "andymass/vim-matchup",
     event = "BufReadPost",
     init = function()
