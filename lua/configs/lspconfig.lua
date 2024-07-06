@@ -10,8 +10,13 @@ wk.register {
   ["[d"] = { vim.diagnostic.goto_prev, "Prev diagnostic" },
   ["]d"] = { vim.diagnostic.goto_next, "Next diagnostic" },
   ["<leader>do"] = { vim.diagnostic.open_float, "open diagnostic" },
-  ["<leader>dd"] = { vim.diagnostic.disable, "disable diagnostic" },
   ["<leader>de"] = { vim.diagnostic.enable, "enable diagnostic" },
+  ["<leader>dd"] = {
+    function()
+      vim.diagnostic.enable(false)
+    end,
+    "disable diagnostic",
+  },
 }
 
 -- Use LspAttach autocommand to only map the following keys
@@ -72,13 +77,19 @@ setup "eslint"
 setup "jsonls"
 setup "emmet_ls"
 setup "gopls"
-setup "clangd"
+setup("clangd", {
+  on_attach = function(client, bufnr)
+    wk.register({
+      ["gh"] = { "<cmd>ClangdSwitchSourceHeader<cr>", "Source/header" },
+    }, { bufnr = bufnr })
+  end,
+})
 
 setup("arduino_language_server", {
-   on_new_config = function (config, root_dir)
+  on_new_config = function(config, root_dir)
     config.capabilities.textDocument.semanticTokens = vim.NIL
     config.capabilities.workspace.semanticTokens = vim.NIL
-  end
+  end,
 })
 
 setup("lua_ls", {
