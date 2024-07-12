@@ -98,6 +98,7 @@ return {
       }
       local linters_by_ft = {
         python = { "mypy", "flake8", "pydoclint" },
+        cpp = { "clazy" },
       }
       vim.api.nvim_create_autocmd({ "BufWritePost" }, {
         callback = function()
