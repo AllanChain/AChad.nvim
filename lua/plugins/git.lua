@@ -14,7 +14,8 @@ return {
     cmd = { "DiffviewOpen", "DiffviewFileHistory" },
     keys = {
       { "<leader>go", "<Cmd>DiffviewOpen<CR>", desc = "Open diffview" },
-      { "<leader>gh", "<Cmd>DiffviewFileHistory<CR>", desc = "Open file history" },
+      { "<leader>gf", "<Cmd>DiffviewFileHistory %<CR>", desc = "Open file history" },
+      { "<leader>gh", "<Cmd>DiffviewFileHistory<CR>", desc = "Open history" },
     },
     config = true,
   },
