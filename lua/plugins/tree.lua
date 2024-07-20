@@ -71,11 +71,13 @@ return {
     config = function(_, opts)
       require("nvim-tree").setup(opts)
     end,
-  },
-  {
-    "nvim-tree/nvim-web-devicons",
-    config = function()
-      require("nvim-web-devicons").setup()
-    end,
+    dependencies = {
+      {
+        "nvim-tree/nvim-web-devicons",
+        config = function()
+          require("nvim-web-devicons").setup()
+        end,
+      },
+    },
   },
 }
