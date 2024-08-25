@@ -126,8 +126,15 @@ return {
     "MeanderingProgrammer/markdown.nvim",
     dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
     ft = { "markdown" },
-    config = function()
-      require("render-markdown").setup {}
+    opts = {
+      render_modes = { 'n', 'v', 'i', 'c' },
+      heading = {
+        sign = false,
+        backgrounds = { 'RenderMarkdownH2Bg' },
+      },
+    },
+    config = function(_, opts)
+      require("render-markdown").setup(opts)
     end,
   },
   {
