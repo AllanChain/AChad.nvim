@@ -6,16 +6,17 @@ local path = util.path
 local exepath = util.exepath
 
 -- Global mappings.
-wk.register {
-  ["[d"] = { vim.diagnostic.goto_prev, "Prev diagnostic" },
-  ["]d"] = { vim.diagnostic.goto_next, "Next diagnostic" },
-  ["<leader>do"] = { vim.diagnostic.open_float, "open diagnostic" },
-  ["<leader>de"] = { vim.diagnostic.enable, "enable diagnostic" },
-  ["<leader>dd"] = {
+wk.add {
+  { "[d", vim.diagnostic.goto_prev, desc = "Prev diagnostic" },
+  { "]d", vim.diagnostic.goto_next, desc = "Next diagnostic" },
+  { "<leader>do", vim.diagnostic.open_float, desc = "open diagnostic" },
+  { "<leader>de", vim.diagnostic.enable, desc = "enable diagnostic" },
+  {
+    "<leader>dd",
     function()
       vim.diagnostic.enable(false)
     end,
-    "disable diagnostic",
+    desc = "disable diagnostic",
   },
 }
 
@@ -25,16 +26,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(ev)
     -- Enable completion triggered by <c-x><c-o>
     vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-    wk.register({
-      ["gD"] = { vim.lsp.buf.declaration, "Goto declaration" },
-      ["gd"] = { vim.lsp.buf.definition, "Goto declaration" },
-      ["<leader>D"] = { vim.lsp.buf.type_definition, "Goto type" },
-      ["gr"] = { vim.lsp.buf.references, "Goto references" },
-      ["K"] = { vim.lsp.buf.hover, "Hover hint" },
-      ["gi"] = { vim.lsp.buf.implementation, "Goto implementation" },
-      ["<C-k>"] = { vim.lsp.buf.signature_help, "Signature" },
-      ["<leader>ra"] = { vim.lsp.buf.rename, "Rename" },
-      ["<leader>ca"] = { vim.lsp.buf.code_action, "Code action" },
+    wk.add({
+      { "gD", vim.lsp.buf.declaration, desc = "Goto declaration" },
+      { "gd", vim.lsp.buf.definition, desc = "Goto declaration" },
+      { "<leader>D", vim.lsp.buf.type_definition, desc = "Goto type" },
+      { "gr", vim.lsp.buf.references, desc = "Goto references" },
+      { "K", vim.lsp.buf.hover, desc = "Hover hint" },
+      { "gi", vim.lsp.buf.implementation, desc = "Goto implementation" },
+      { "<C-k>", vim.lsp.buf.signature_help, desc = "Signature" },
+      { "<leader>ra", vim.lsp.buf.rename, desc = "Rename" },
+      { "<leader>ca", vim.lsp.buf.code_action, desc = "Code action" },
     }, { buffer = ev.buf })
   end,
 })
@@ -80,8 +81,8 @@ setup "gopls"
 
 setup("clangd", {
   on_attach = function(client, bufnr)
-    wk.register({
-      ["gh"] = { "<cmd>ClangdSwitchSourceHeader<cr>", "Source/header" },
+    wk.add({
+      { "gh", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Source/header" },
     }, { bufnr = bufnr })
   end,
 })
