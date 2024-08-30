@@ -42,12 +42,15 @@ return {
     end,
   },
   {
-    "dgagn/diagflow.nvim",
-    event = "LspAttach",
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "VeryLazy",
     opts = {
-      toggle_event = { 'InsertEnter' }, -- disable when insert
-      scope = "line",
+      hi = {
+        mixing_color = "#2e3440"
+      },
     },
+    init = function()
+      vim.diagnostic.config { virtual_text = false }
+    end,
   },
 }
-
