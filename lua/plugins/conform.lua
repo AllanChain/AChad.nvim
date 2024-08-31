@@ -114,7 +114,7 @@ return {
           with("eslint_d", {
             { read = "package.json", find = "eslint" },
           }, bufnr),
-          with({ "prettierd", "prettier" }, {
+          with("prettier", {
             { read = "package.json", find = "prettier" },
           }, bufnr),
         }
