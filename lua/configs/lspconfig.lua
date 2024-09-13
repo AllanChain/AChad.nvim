@@ -103,7 +103,7 @@ setup("lua_ls", {
   },
 })
 
-setup("tsserver", {
+setup("ts_ls", {
   on_attach = function(client, bufnr)
     client.server_capabilities.document_formatting = false
   end,
