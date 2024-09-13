@@ -138,6 +138,14 @@ return {
     end,
   },
   {
+    "chomosuke/typst-preview.nvim",
+    ft = "typst",
+    version = "0.3.*",
+    build = function()
+      require("typst-preview").update()
+    end,
+  },
+  {
     "stevearc/aerial.nvim",
     event = "BufReadPost",
     opts = {},

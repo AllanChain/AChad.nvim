@@ -39,5 +39,12 @@ vim.filetype.add {
   },
 }
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "typst",
+  callback = function()
+    vim.bo.commentstring = "// %s"
+  end,
+})
+
 -- Sometimes I got :Qa instead of :qa
 vim.api.nvim_create_user_command("Qa", "qa", {})

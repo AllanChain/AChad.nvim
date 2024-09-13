@@ -78,6 +78,7 @@ setup "eslint"
 setup "jsonls"
 setup "emmet_ls"
 setup "gopls"
+setup "tinymist"
 
 setup("clangd", {
   on_attach = function(client, bufnr)
