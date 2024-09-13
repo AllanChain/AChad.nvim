@@ -127,10 +127,10 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
     ft = { "markdown" },
     opts = {
-      render_modes = { 'n', 'v', 'i', 'c' },
+      render_modes = { "n", "v", "i", "c" },
       heading = {
         sign = false,
-        backgrounds = { 'RenderMarkdownH2Bg' },
+        backgrounds = { "RenderMarkdownH2Bg" },
       },
     },
     config = function(_, opts)
