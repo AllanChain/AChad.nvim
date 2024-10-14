@@ -14,6 +14,7 @@ return {
     lazy = false,
     opts = {
       detection_methods = { "pattern", "lsp" },
+      patterns = { ".git" },
       scope_chdir = "tab",
       silent_chdir = false,
     },
