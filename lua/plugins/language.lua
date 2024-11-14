@@ -162,7 +162,7 @@ return {
         end,
       }
       -- use AerialToggle! to retain cursor focus
-      vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle<CR>")
+      vim.keymap.set("n", "<leader>az", "<cmd>AerialToggle<CR>")
     end,
   },
 }
