@@ -41,6 +41,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+local has_blink, blink = pcall(require, 'blink.cmp')
+if has_blink then
+  capabilities = blink.get_lsp_capabilities(capabilities)
+end
 
 capabilities.textDocument.completion.completionItem = {
   documentationFormat = { "markdown", "plaintext" },
