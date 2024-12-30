@@ -13,6 +13,7 @@ return {
       ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
     },
     completion = {
+      menu = { auto_show = function(ctx) return ctx.mode ~= 'cmdline' end },
       documentation = {
         auto_show = true,
         auto_show_delay_ms = 500,
