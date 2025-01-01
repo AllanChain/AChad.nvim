@@ -11,6 +11,10 @@ return {
       preset = "enter",
       ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
       ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+      cmdline = {
+        ["<Tab>"] = { "show", "select_next", "snippet_forward", "fallback" },
+        ['<CR>'] = { 'accept', 'fallback' },
+      }
     },
     completion = {
       menu = { auto_show = function(ctx) return ctx.mode ~= 'cmdline' end },
