@@ -1,3 +1,6 @@
+-- Buffer local leader for plugins
+vim.g.maplocalleader = ','
+
 local map = vim.keymap.set
 
 map("n", "<C-s>", function()

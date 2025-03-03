@@ -10,4 +10,11 @@ return {
     "nvim-pack/nvim-spectre",
     cmd = "Spectre",
   },
+  {
+    "MagicDuck/grug-far.nvim",
+    config = function()
+      require("grug-far").setup {
+      }
+    end,
+  },
 }
