@@ -74,6 +74,8 @@ return {
       },
     },
     config = function()
+      local bar_bg = { attribute = "bg", highlight = "PMenu" }
+      local bar_bg_selected = { attribute = "bg", highlight = "DiffChange" }
       require("bufferline.tabpages").get = require("configs.tabpages").get
       require("bufferline").setup {
         options = {
@@ -83,6 +85,20 @@ return {
             { filetype = "NvimTree", text = "File Explorer", highlight = "StatusLine", separator = "  " },
             { filetype = "aerial", text = "Aerial", highlight = "StatusLine", separator = true },
           },
+        },
+        highlights = {
+          fill = { bg = bar_bg },
+          buffer_selected = { bg = bar_bg_selected },
+          tab_selected = { bg = bar_bg_selected },
+          close_button_selected = { bg = bar_bg_selected },
+          modified_selected = { bg = bar_bg_selected },
+          duplicate_selected = { bg = bar_bg_selected },
+          tab_separator_selected = { fg = bar_bg, bg = bar_bg_selected },
+          tab_separator = { fg = bar_bg },
+          separator_selected = { fg = bar_bg, bg = bar_bg_selected },
+          separator_visible = { fg = bar_bg },
+          separator = { fg = bar_bg },
+          offset_separator = { bg = bar_bg },
         },
       }
     end,
