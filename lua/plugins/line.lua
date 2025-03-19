@@ -82,7 +82,7 @@ return {
           separator_style = "slope",
           modified_icon = "",
           offsets = {
-            { filetype = "NvimTree", text = "File Explorer", highlight = "StatusLine", separator = "  " },
+            { filetype = "neo-tree", text = "File Explorer", highlight = "StatusLine", separator = "  " },
             { filetype = "aerial", text = "Aerial", highlight = "StatusLine", separator = true },
           },
         },
