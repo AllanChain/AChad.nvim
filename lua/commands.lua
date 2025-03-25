@@ -25,7 +25,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
-    if vim.env.TMUX and vim.v.event.operator == "y" and vim.v.event.regname == "" then
+    if (vim.env.ZELLIJ or vim.env.TMUX) and vim.v.event.operator == "y" and vim.v.event.regname == "" then
       require("vim.ui.clipboard.osc52").copy "+"(vim.v.event.regcontents)
     end
   end,
