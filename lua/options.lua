@@ -29,7 +29,11 @@ opt.splitbelow = true
 opt.splitright = true
 opt.termguicolors = true
 opt.timeoutlen = 400
+
+-- undo and backup
 opt.undofile = true
+opt.backup = true
+opt.backupdir = vim.fn.stdpath("cache") .. "/backup/"
 
 opt.timeoutlen = 400
 opt.updatetime = 250
