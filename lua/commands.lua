@@ -12,6 +12,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
       return
     end
     vim.api.nvim_win_set_option(0, "colorcolumn", tw)
+    vim.api.nvim_win_set_option(0, "formatoptions", "cq")
   end,
 })
 
