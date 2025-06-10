@@ -41,87 +41,9 @@ return {
       else
         capabilities = {}
       end
+      vim.lsp.config("*", { capabilities = capabilities })
 
-      require("mason-lspconfig").setup {
-        handlers = {
-          function(server_name) -- default handler
-            require("lspconfig")[server_name].setup { capabilities = capabilities }
-          end,
-          lua_ls = function()
-            lspconfig.lua_ls.setup {
-              capabilities = capabilities,
-              settings = {
-                Lua = { diagnostics = { globals = { "vim" } } },
-              },
-            }
-          end,
-          clangd = function()
-            lspconfig.clangd.setup {
-              capabilities = capabilities,
-              on_attach = function(client, bufnr)
-                local wk_ok, wk = pcall(require, "which-key")
-                if wk_ok then
-                  wk.add({
-                    { "gh", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Source/header" },
-                  }, { bufnr = bufnr })
-                end
-              end,
-            }
-          end,
-          arduino_language_server = function()
-            lspconfig.arduino_language_server.setup {
-              capabilities = capabilities,
-              on_new_config = function(config, root_dir)
-                config.capabilities.textDocument.semanticTokens = vim.NIL
-                config.capabilities.workspace.semanticTokens = vim.NIL
-              end,
-            }
-          end,
-          ts_ls = function()
-            lspconfig.ts_ls.setup {
-              capabilities = capabilities,
-              on_attach = function(client, bufnr)
-                client.server_capabilities.document_formatting = false
-              end,
-            }
-          end,
-          pyright = function()
-            lspconfig.pyright.setup {
-              capabilities = capabilities,
-              settings = {
-                python = { analysis = { typeCheckingMode = "off" } },
-              },
-            }
-          end,
-          ruff = function()
-            lspconfig.ruff.setup {
-              capabilities = capabilities,
-              on_attach = function(client, bufnr)
-                if client.name == "ruff" then
-                  -- Disable hover in favor of Pyright
-                  client.server_capabilities.hoverProvider = false
-                end
-              end,
-            }
-          end,
-          julials = function()
-            lspconfig.julials.setup {
-              capabilities = capabilities,
-              settings = {
-                julia = { lint = { missingrefs = "none" } },
-              },
-            }
-          end,
-          texlab = function()
-            lspconfig.texlab.setup {
-              capabilities = capabilities,
-              settings = {
-                texlab = { build = { args = { "-interaction=nonstopmode", "%f" } } },
-              },
-            }
-          end,
-        },
-      }
+      require("mason-lspconfig").setup {}
     end,
   },
   {
