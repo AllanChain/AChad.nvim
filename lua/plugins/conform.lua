@@ -94,7 +94,7 @@ return {
     },
     opts = function()
       local function python_formatters(bufnr)
-        return expand_formatters {
+        local formatters = expand_formatters {
           with("ruff_fix", {
             { read = "pyproject.toml", find = "ruff" },
           }, bufnr),
@@ -108,6 +108,10 @@ return {
             { read = "pyproject.toml", find = "isort" },
           }, bufnr),
         }
+        if next(formatters) == nil then
+          table.insert(formatters, "ruff_format")
+        end
+        return formatters
       end
       local function js_formatters(bufnr)
         return expand_formatters {
