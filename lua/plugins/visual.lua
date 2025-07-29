@@ -5,6 +5,7 @@ return {
   {
     "rmehri01/onenord.nvim",
     lazy = false,
+    priority = 1000, -- High priority for color themes
     config = function()
       local colors = require("onenord.colors").load()
       require("onenord").setup {
