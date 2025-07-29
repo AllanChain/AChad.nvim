@@ -63,11 +63,6 @@ return {
     end,
   },
   {
-    "JuliaEditorSupport/julia-vim",
-    lazy = false,
-    ft = { "julia" },
-  },
-  {
     "MeanderingProgrammer/markdown.nvim",
     dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
     ft = { "markdown" },
@@ -81,17 +76,6 @@ return {
     config = function(_, opts)
       require("render-markdown").setup(opts)
     end,
-  },
-  {
-    "chomosuke/typst-preview.nvim",
-    ft = "typst",
-    version = "1.*",
-    build = function()
-      require("typst-preview").update()
-    end,
-    opts = {
-      dependencies_bin = { ['tinymist'] = 'tinymist' }
-    }
   },
   {
     "stevearc/aerial.nvim",
