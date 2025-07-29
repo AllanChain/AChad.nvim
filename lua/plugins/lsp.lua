@@ -32,6 +32,7 @@ return {
   },
   {
     "williamboman/mason-lspconfig.nvim",
+    event = "BufReadPost",
     config = function()
       local lspconfig = require "lspconfig"
       local ok, cmp_nvim_lsp = pcall(require "cmp_nvim_lsp")
@@ -48,6 +49,7 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
+    event = "BufReadPost",
     keys = {
       { "[d", vim.diagnostic.goto_prev, desc = "Prev diagnostic" },
       { "]d", vim.diagnostic.goto_next, desc = "Next diagnostic" },
