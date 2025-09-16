@@ -53,7 +53,7 @@ return {
     keys = {
       { "[d", vim.diagnostic.goto_prev, desc = "Prev diagnostic" },
       { "]d", vim.diagnostic.goto_next, desc = "Next diagnostic" },
-      { "<leader>do", vim.diagnostic.open_float, desc = "open diagnostic" },
+      { "<leader>dv", vim.diagnostic.open_float, desc = "open diagnostic" },
       { "<leader>de", vim.diagnostic.enable, desc = "enable diagnostic" },
       {
         "<leader>dd",
