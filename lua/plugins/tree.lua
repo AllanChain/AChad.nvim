@@ -12,10 +12,13 @@ return {
         width = 30,
       },
       filesystem = {
+        filtered_items = {
+          hide_dotfiles = false,
+        },
         follow_current_file = {
-          enabled = true
-        }
-      }
+          enabled = true,
+        },
+      },
     },
     dependencies = {
       "nvim-lua/plenary.nvim",
