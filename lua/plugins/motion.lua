@@ -7,7 +7,7 @@ return {
     event = "BufReadPost",
   },
   {
-    "ggandor/leap.nvim", -- s{char1}{char2} fast navigation
+    url = "https://codeberg.org/andyg/leap.nvim", -- s{char1}{char2} fast navigation
     event = "BufReadPost",
     config = function()
       local ok, leap = pcall(require, "leap")
