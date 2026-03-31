@@ -29,7 +29,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
     wk.add({
       { "gD", vim.lsp.buf.declaration, desc = "Goto declaration" },
-      { "gd", vim.lsp.buf.definition, desc = "Goto declaration" },
+      { "gd", vim.lsp.buf.definition, desc = "Goto definition" },
       { "<leader>D", vim.lsp.buf.type_definition, desc = "Goto type" },
       { "gr", vim.lsp.buf.references, desc = "Goto references" },
       { "K", vim.lsp.buf.hover, desc = "Hover hint" },
