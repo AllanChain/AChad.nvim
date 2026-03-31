@@ -13,7 +13,10 @@ return {
     event = { "InsertEnter", "CmdlineEnter" },
     branch = "v0.6",
     opts = {
-      --Config goes here
+      tabout = {
+        enable = true,
+        hopout = true,
+      }
     },
   },
   { -- auto adjust shiftwidth
