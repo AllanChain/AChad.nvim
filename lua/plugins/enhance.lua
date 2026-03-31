@@ -42,8 +42,4 @@ return {
     "h-hg/fcitx.nvim",
     event = "BufReadPost",
   },
-  {
-    "yioneko/nvim-yati", -- better indent than treesitter
-    event = "BufReadPost",
-  },
 }

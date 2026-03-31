@@ -4,28 +4,20 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    event = { "VimEnter" },
-    cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
+    lazy = false,
     build = ":TSUpdate",
-    opts = {
-      highlight = {
-        enable = true,
-        use_languagetree = true,
-      },
-      -- use yati indent instead of the original one
-      yati = {
-        enable = true,
-      },
-      indent = {
-        enable = false,
-      },
-      matchup = {
-        enable = true,
-      },
-    },
-    config = function(_, opts)
-      require("nvim-treesitter.install").prefer_git = true
-      require("nvim-treesitter.configs").setup(opts)
+    config = function()
+      require("nvim-treesitter").setup()
+
+      vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup("dotfiles_treesitter", { clear = true }),
+        callback = function(args)
+          local ok = pcall(vim.treesitter.start, args.buf)
+          if ok then
+            vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          end
+        end,
+      })
     end,
   },
   {
