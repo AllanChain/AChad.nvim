@@ -1,21 +1,3 @@
-local is_inside_work_tree = {}
-
-local project_files = function()
-  local opts = {}
-
-  local cwd = vim.fn.getcwd()
-  if is_inside_work_tree[cwd] == nil then
-    vim.fn.system "git rev-parse --is-inside-work-tree"
-    is_inside_work_tree[cwd] = vim.v.shell_error == 0
-  end
-
-  if is_inside_work_tree[cwd] then
-    require("telescope.builtin").git_files(opts)
-  else
-    require("telescope.builtin").find_files(opts)
-  end
-end
-
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -25,8 +7,19 @@ return {
     keys = {
       {
         "<leader>ff",
-        project_files,
+        function()
+          require("telescope.builtin").find_files {
+            find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+          }
+        end,
         desc = "Find files",
+      },
+      {
+        "<leader>fg",
+        function()
+          require("telescope.builtin").git_files()
+        end,
+        desc = "Find Git files",
       },
       {
         "<leader>fw",
@@ -55,6 +48,13 @@ return {
           require("telescope").extensions.undo.undo()
         end,
         desc = "Undo history",
+      },
+      {
+        "<leader>fr",
+        function()
+          require("telescope.builtin").registers()
+        end,
+        desc = "Find registers",
       },
       {
         "<leader>fF",
