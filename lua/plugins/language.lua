@@ -12,10 +12,7 @@ return {
       vim.api.nvim_create_autocmd("FileType", {
         group = vim.api.nvim_create_augroup("dotfiles_treesitter", { clear = true }),
         callback = function(args)
-          local ok = pcall(vim.treesitter.start, args.buf)
-          if ok then
-            vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-          end
+          vim.treesitter.start(args.buf)
         end,
       })
     end,
