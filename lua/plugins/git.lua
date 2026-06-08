@@ -20,7 +20,7 @@ return {
     config = true,
   },
   {
-    "akinsho/git-conflict.nvim",
+    "konradmalik/git-conflict.nvim",
     event = "BufReadPost",
     keys = {
       { "<leader>co", "<Plug>(git-conflict-ours)", desc = "Use ours" },
