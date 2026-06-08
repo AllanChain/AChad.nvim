@@ -31,7 +31,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
       { "gD", vim.lsp.buf.declaration, desc = "Goto declaration" },
       { "gd", vim.lsp.buf.definition, desc = "Goto definition" },
       { "<leader>D", vim.lsp.buf.type_definition, desc = "Goto type" },
-      { "gr", vim.lsp.buf.references, desc = "Goto references" },
+      {
+        "gr",
+        function()
+          local telescope_ok, telescope = pcall(require, "telescope.builtin")
+          if telescope_ok then
+            telescope.lsp_references()
+          else
+            vim.lsp.buf.references()
+          end
+        end,
+        desc = "Goto references",
+      },
       { "K", vim.lsp.buf.hover, desc = "Hover hint" },
       { "gi", vim.lsp.buf.implementation, desc = "Goto implementation" },
       { "<C-k>", vim.lsp.buf.signature_help, desc = "Signature" },
