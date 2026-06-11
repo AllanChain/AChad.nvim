@@ -16,6 +16,14 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("dotfiles_treesitter", { clear = true }),
+  callback = function(args)
+    pcall(vim.treesitter.start, args.buf)
+  end,
+})
+
 -- autoclose quickfix list after selection item
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "qf",

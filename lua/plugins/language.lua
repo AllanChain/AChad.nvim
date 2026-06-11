@@ -3,19 +3,21 @@
 --======================================================]]
 return {
   {
-    "nvim-treesitter/nvim-treesitter",
-    branch = "main",
-    lazy = false,
-    build = ":TSUpdate",
+    "romus204/tree-sitter-manager.nvim",
     config = function()
-      require("nvim-treesitter").setup()
-
-      vim.api.nvim_create_autocmd("FileType", {
-        group = vim.api.nvim_create_augroup("dotfiles_treesitter", { clear = true }),
-        callback = function(args)
-          pcall(vim.treesitter.start, args.buf)
-        end,
-      })
+      local languages = require "tree-sitter-manager.repos"
+      local github = require "github"
+      for plugin_name, plugin_config in pairs(languages) do
+        if plugin_config.install_info and plugin_config.install_info.url then
+          local original_url = plugin_config.install_info.url
+          local new_url = original_url:gsub("github%.com", github)
+          plugin_config.install_info.url = new_url
+        end
+      end
+      require("tree-sitter-manager").setup {
+        border = "rounded",
+        languages = languages,
+      }
     end,
   },
   {
