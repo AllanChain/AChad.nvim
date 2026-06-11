@@ -3,8 +3,8 @@
 --======================================================]]
 return {
   { -- easy change surroundings
-    "tpope/vim-surround",
-    event = "BufReadPost",
+    "kylechui/nvim-surround",
+    event = "VeryLazy",
   },
   {
     url = "https://codeberg.org/andyg/leap.nvim", -- s{char1}{char2} fast navigation
