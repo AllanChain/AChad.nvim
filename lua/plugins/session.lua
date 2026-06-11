@@ -10,7 +10,7 @@ return {
     end,
   },
   {
-    "ahmedkhalf/project.nvim", -- auto cd into project root
+    "DrKJeff16/project.nvim", -- auto cd into project root
     lazy = false,
     opts = {
       detection_methods = { "pattern", "lsp" },
@@ -19,7 +19,7 @@ return {
       silent_chdir = false,
     },
     config = function(_, opts)
-      require("project_nvim").setup(opts)
+      require("project").setup(opts)
     end,
   },
   {
