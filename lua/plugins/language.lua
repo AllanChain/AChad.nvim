@@ -10,7 +10,7 @@ return {
       for plugin_name, plugin_config in pairs(languages) do
         if plugin_config.install_info and plugin_config.install_info.url then
           local original_url = plugin_config.install_info.url
-          local new_url = original_url:gsub("github%.com", github)
+          local new_url = original_url:gsub("https://github%.com", github)
           plugin_config.install_info.url = new_url
         end
       end
